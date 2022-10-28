@@ -67,11 +67,11 @@ describe 'Tests Unsplash API library' do
 
   describe 'Topics information' do
     before do
-      @view = LightofDay::UnsplashApi.new(UNSPLAH_TOKEN).view(ID)
+      @topic = LightofDay::Unsplash::TopicMapper.new(UNSPLAH_TOKEN).find_all_topics
     end
 
     it '😃: should identify topics' do
-      topics = @view.topics
+      topics = @topic.topics
       _(topics.count).must_equal CORRECT['view']['topics'].count
 
       keys = %w[title description topic_url]
@@ -83,4 +83,5 @@ describe 'Tests Unsplash API library' do
       end
     end
   end
+
 end

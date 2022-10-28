@@ -23,7 +23,10 @@ describe 'Tests Unsplash API library' do
 
   describe 'Photos information' do
     it '😃: should provide correct view attributes' do
-      view = LightofDay::UnsplashApi.new(UNSPLAH_TOKEN).view(ID)
+      view = 
+        LightofDay::Unsplash::ViewMapper
+          .new(UNSPLAH_TOKEN, TOPIC_ID)
+          .find_a_photo
       _(view.width).must_equal CORRECT['view']['width']
       _(view.height).must_equal CORRECT['view']['height']
       _(view.urls).must_equal CORRECT['view']['urls']
@@ -31,14 +34,18 @@ describe 'Tests Unsplash API library' do
 
     it '😭: should raise exception on incorrect view ID' do
       _(proc do
-        LightofDay::UnsplashApi.new(UNSPLAH_TOKEN).view('anyID')
-      end).must_raise LightofDay::UnsplashApi::Response::NotFound
+        LightofDay::Unsplash::ViewMapper
+          .new(UNSPLAH_TOKEN, TOPIC_ID)
+          .find_a_photo()
+      end).must_raise LightofDay::Unsplash::Api::Response::NotFound
     end
 
     it '😭: should raise exception when unauthorized' do
       _(proc do
-        LightofDay::UnsplashApi.new('BAD_TOKEN').view(ID)
-      end).must_raise LightofDay::UnsplashApi::Response::Unauthorized
+        LightofDay::Unsplash::ViewMapper
+        .new('BAD_TOKEN', TOPIC_ID)
+        .find_a_photo
+      end).must_raise LightofDay::Unsplash::Api::Response::Unauthorized
     end
   end
 

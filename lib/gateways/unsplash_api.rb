@@ -11,7 +11,7 @@ module LightofDay
       #   super(path)
       # end
       def photo_data
-        Requset.new(UNSPLASH_SECRETS_KEY).get_with_authorized(@path, 'Client-ID').parse
+        Requset.new(@token).get_with_authorized(@path, 'Client-ID').parse
       end
 =begin
       def topic_data

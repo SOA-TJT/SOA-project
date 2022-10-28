@@ -43,7 +43,7 @@ end
 
 topic_results = call_unsplash_topic(config)
 
-mushroom_picture_url = unsplash_api_path("photos/random/?topics=#{topic_results[1]['topic_id']}&orientation=landscape")
+mushroom_picture_url = unsplash_api_path("photos/random/?topics=xjPR4hlkBGA&orientation=landscape")
 unsplash_response[mushroom_picture_url] = call_unsplash_url(config, mushroom_picture_url)
 mushroom_photo = unsplash_response[mushroom_picture_url].parse
 

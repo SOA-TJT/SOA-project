@@ -1,7 +1,6 @@
 # frozen_string_literal: false
 
 require_relative '../entities/view'
-require_relative '../entities/creator'
 require_relative '../gateways/unsplash_api'
 require_relative 'topic_mapper'
 

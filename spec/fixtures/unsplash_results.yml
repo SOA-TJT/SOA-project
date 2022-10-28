@@ -1,17 +1,16 @@
 ---
 view:
-  width: 5472
-  height: 3648
-  urls: https://images.unsplash.com/photo-1541972184324-d7e22e823db4?ixid=MnwzNzE2OTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjY5MTk5OTc&ixlib=rb-4.0.3
+  width: 6720
+  height: 4480
+  urls: https://images.unsplash.com/photo-1528696892704-5e1122852276?ixid=MnwzNzE2OTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjY5MjA2ODU&ixlib=rb-4.0.3
   creator:
-    :name: Douglas Lopez
-    :bio: "Fotografo gastronômico, publicitário e de casamento. \r\nInstagram: @Dougglasfoto
-      | @DougglasLopez"
-    :photo: https://images.unsplash.com/profile-1581475662553-b88974c13858image?ixlib=rb-4.0.3&crop=faces&fit=crop&w=128&h=128
+    :name: Liana Mikah
+    :bio: designer, photographer & social media curator in portland, OR
+    :photo: https://images.unsplash.com/profile-1502565518071-0757cd74b5a5?ixlib=rb-4.0.3&crop=faces&fit=crop&w=128&h=128
   topics:
     food-drink:
       status: approved
-      approved_on: '2020-04-06T14:20:20Z'
+      approved_on: '2020-04-06T14:20:21Z'
 topics:
   1:
     topic_id: xjPR4hlkBGA

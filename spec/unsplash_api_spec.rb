@@ -25,8 +25,8 @@ describe 'Tests Unsplash API library' do
     it '😃: should provide correct view attributes' do
       view = 
         LightofDay::Unsplash::ViewMapper
-          .new(UNSPLAH_TOKEN, TOPIC_ID)
-          .find_a_photo
+        .new(UNSPLAH_TOKEN, TOPIC_ID)
+        .find_a_photo
       _(view.width).must_equal CORRECT['view']['width']
       _(view.height).must_equal CORRECT['view']['height']
       _(view.urls).must_equal CORRECT['view']['urls']
@@ -35,8 +35,8 @@ describe 'Tests Unsplash API library' do
     it '😭: should raise exception on incorrect view ID' do
       _(proc do
         LightofDay::Unsplash::ViewMapper
-          .new(UNSPLAH_TOKEN, TOPIC_ID)
-          .find_a_photo()
+          .new(UNSPLAH_TOKEN, 'BAD_TOPIC_ID')
+          .find_a_photo
       end).must_raise LightofDay::Unsplash::Api::Response::NotFound
     end
 
@@ -48,7 +48,7 @@ describe 'Tests Unsplash API library' do
       end).must_raise LightofDay::Unsplash::Api::Response::Unauthorized
     end
   end
-
+=begin
   describe 'Creater information' do
     before do
       @view = LightofDay::UnsplashApi.new(UNSPLAH_TOKEN).view(ID)
@@ -83,5 +83,5 @@ describe 'Tests Unsplash API library' do
       end
     end
   end
-
+=end
 end

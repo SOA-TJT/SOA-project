@@ -67,12 +67,14 @@ describe 'Tests Unsplash API library' do
   end
 =end
   describe 'Topics information' do
-    before do
-      @topic = LightofDay::Unsplash::TopicMapper.new(UNSPLAH_TOKEN)
-    end
+    # before do
+    #  @topic = LightofDay::Unsplash::TopicMapper.new(UNSPLAH_TOKEN)
+    # end
 
     it '😃: should identify topics' do
-      topics = @topic.find_all_topics
+      topics = LightofDay::Unsplash::TopicMapper
+               .new(UNSPLAH_TOKEN)
+               .find_all_topics
       _(topics.count).must_equal CORRECT['topics'].count
       _(topics.first.topic_id).must_equal CORRECT['topics'][1]['topic_id']
       _(topics.last.topic_id).must_equal CORRECT['topics'][24]['topic_id']
@@ -85,6 +87,13 @@ describe 'Tests Unsplash API library' do
         _(titles).must_equal correct_titles
       end
 =end
+    end
+    it '😭: should raise exception when unauthorized' do
+      _(proc do
+        LightofDay::Unsplash::TopicMapper
+        .new('BAD_TOKEN')
+        .find_all_topics
+      end).must_raise LightofDay::Unsplash::Api::Response::Unauthorized
     end
   end
 

@@ -2,15 +2,18 @@
 view:
   width: 6000
   height: 4000
-  urls: https://images.unsplash.com/photo-1643628636292-fcf02b8042e0?ixid=MnwzNzE2OTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjcwMjg1OTk&ixlib=rb-4.0.3
+  urls: https://images.unsplash.com/photo-1585100462050-bcf3bf4ccf75?ixid=MnwzNzE2OTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NjcwMjk3MTI&ixlib=rb-4.0.3
   creator:
-    :name: Cristina Pop
-    :bio:
-    :photo: https://images.unsplash.com/profile-1660143915443-8cd003c15b89image?ixlib=rb-1.2.1&crop=faces&fit=crop&w=128&h=128
+    :name: Kellice Chua
+    :bio: "Please credit my images and/or tag me @kellicechua on Instagram if you
+      use them! \U0001FA90 \U0001F4F7\r\n"
+    :photo: https://images.unsplash.com/profile-1609725285334-63dae6f92f62image?ixlib=rb-1.2.1&crop=faces&fit=crop&w=128&h=128
   topics:
     food-drink:
       status: approved
-      approved_on: '2022-02-01T14:28:36Z'
+      approved_on: '2020-04-29T11:21:34Z'
+    animals:
+      status: rejected
 topics:
   1:
     topic_id: xjPR4hlkBGA

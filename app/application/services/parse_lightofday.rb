@@ -15,6 +15,7 @@ module LightofDay
 
       def parse_lightofday(input)
         lightofday_data = JSON.parse(input)
+        puts lightofday_data.class
         inspiration_record = create_inspiration(lightofday_data['@attributes']['inspiration']['@attributes'])
         view_record = create_view(lightofday_data['@attributes'], inspiration_record)
         Success(view_record)

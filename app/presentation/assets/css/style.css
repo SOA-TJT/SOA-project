@@ -751,6 +751,9 @@ input[type="submit"]{
 
 }
 
+.hidden{
+  display: none;
+}
 
 /* @media (max-width: 768px) {
   .favorite-item-quote{

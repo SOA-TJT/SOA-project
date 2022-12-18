@@ -1,25 +1,29 @@
 # frozen_string_literal: true
 
-require 'json'
-require 'yaml'
-puts 'test'
-require_relative 'require_app'
-require_app
-# require_app(%w[infrastructure models])
-TOPIC_ID = 'xjPR4hlkBGA'
-key_path = File.expand_path('./config/secrets.yml', __dir__)
-CONFIG = YAML.safe_load(File.read(key_path))
-puts CONFIG['development']['UNSPLASH_SECRETS_KEY']
-UNSPLAH_TOKEN = CONFIG['development']['UNSPLASH_SECRETS_KEY']
+# require 'json'
+# require 'yaml'
+# puts 'test'
+# require_relative 'require_app'
+# require_app
+# # require_app(%w[infrastructure models])
+# TOPIC_ID = 'xjPR4hlkBGA'
+# key_path = File.expand_path('./config/secrets.yml', __dir__)
+# CONFIG = YAML.safe_load(File.read(key_path))
+# puts CONFIG['development']['UNSPLASH_SECRETS_KEY']
+# UNSPLAH_TOKEN = CONFIG['development']['UNSPLASH_SECRETS_KEY']
 
-topics = LightofDay::Unsplash::TopicMapper
-         .new(UNSPLAH_TOKEN)
-         .find_all_topics
-puts topics
-view = LightofDay::Unsplash::ViewMapper
-       .new(UNSPLAH_TOKEN, TOPIC_ID)
-       .find_a_photo
-puts view
+# topics = LightofDay::Unsplash::TopicMapper
+#          .new(UNSPLAH_TOKEN)
+#          .find_all_topics
+# puts topics
+# view = LightofDay::Unsplash::ViewMapper
+#        .new(UNSPLAH_TOKEN, TOPIC_ID)
+#        .find_a_photo
+# puts view
+my_repo =
+  LightofDay::Database::FocusOrm.create(id: '123', ssid: 'eeeee', uuid: 'cccccc', rest_time: 20,
+                                        work_time: 40, date: Time.now)
+
 # puts view.class.name
 # hash_object = view.instance_variables_hash
 # hash_test = view.context

@@ -1,0 +1,14 @@
+.service-logo.poa-header 
+  a href="/"
+    .sv-light Light 
+    .sv-of of 
+    .sv-day Day
+- focus_data.each do |focus|
+  ul 
+    li #{focus.id}
+    li #{focus.ssid}
+    li #{focus.uuid}
+    li #{focus.rest_time}
+    li #{focus.work_time}
+    li #{focus.date}
+      

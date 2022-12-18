@@ -52,6 +52,7 @@ function reset(){
 
 buttonPlay.addEventListener('click',()=>{
   console.log(timeLeft);
+  safe_time();
   isPlay=!isPlay;
   if(isPlay){
     if((!workTitle.classList.contains('work-active'))&& !restTitle.classList.contains('rest-active')){
@@ -72,6 +73,7 @@ buttonPlay.addEventListener('click',()=>{
               restTitle.classList.add('rest-active'); 
           }
           else{
+            
               timeLeft=parseInt(workTime.innerText)*60; 
               workTitle.classList.add('work-active');
               restTitle.classList.remove('rest-active'); 
@@ -127,3 +129,11 @@ restIncrease.addEventListener('click',()=>{
 restDecrease.addEventListener('click',()=>{
   handleIncrease(restTime,-1);
 });
+
+safe_time=()=>{
+  topic_id=document.getElementById('topic_id').getAttribute("value")
+  console.log(topic_id);
+  // topic_id.split(',')
+  window.location = '/light-of-day/safe/'+ topic_id.split(',')[0]+'/' + workTime.innerText+'/' + restTime.innerText;
+  // window.location = '/light-of-day/topic/'+topic_id;
+}

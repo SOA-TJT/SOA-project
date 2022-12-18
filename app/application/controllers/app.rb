@@ -16,7 +16,7 @@ module LightofDay
     plugin :all_verbs
     plugin :status_handler
 
-    use Rack::MethodOverride
+    # use Rack::MethodOverride
     status_handler(404) do
       view('404')
     end
@@ -90,6 +90,29 @@ module LightofDay
           end
         end
 
+        routing.on 'safe', String, String, String do |topic_slug, rest_time, work_time|
+          # GET /light-of-day/topic/{topic}
+          routing.get do
+            # puts 'hhhlo'
+            Service::StoreFocus.new.call(work_time, rest_time)
+            topic_data = topics_mapper.find_topic(topic_slug)
+            topic_data = topic_data.value!
+            view_data = Service::FindLightofDay.new.call(topic_data)
+            # puts rest_time
+            # puts work_time
+            puts view_data.failure?
+            if view_data.failure?
+              flash[:error] = view_data.failure
+              view_lightofday = []
+            else
+              view_data = view_data.value!
+              view_lightofday = Views::LightofDay.new(view_data)
+            end
+
+            view 'view', locals: { view: view_lightofday, is_saved: false }
+          end
+        end
+
         routing.on 'topic', String do |topic_slug|
           # GET /light-of-day/topic/{topic}
           routing.get do
@@ -128,6 +151,31 @@ module LightofDay
           end
           routing.on String do |view_id|
             # Delete /light-of-day/favorite/{view_id}
+
+            routing.delete do
+              origin_id = view_id.to_s
+              session[:watching].delete(origin_id)
+              routing.redirect '/favorite-list'
+            end
+            # GET /light-of-day/favorite/{view_id}
+            routing.get do
+              lightofday_get = Service::GetLightofDay.new.call(view_id)
+
+              if lightofday_get.failure?
+                flash[:error] = lightofday_get.failure
+              else
+                lightofday_data = lightofday_get.value!
+                flash.now[:error] = 'Data not found' if lightofday_get.nil?
+              end
+
+              view_lightofday = Views::LightofDay.new(lightofday_data)
+              view 'view', locals: { view: view_lightofday, is_saved: true }
+            end
+          end
+
+          routing.on String do |view_id, _minutes|
+            # Delete /light-of-day/favorite/{view_id}
+
             routing.delete do
               origin_id = view_id.to_s
               session[:watching].delete(origin_id)
@@ -149,6 +197,17 @@ module LightofDay
             end
           end
         end
+      end
+
+      routing.on 'test' do
+        focus_data = Service::ListFocus.new.call
+        if focus_data.failure?
+          flash[:error] = focus_data.failure
+          focus_data = []
+        else
+          focus_data = focus_data.value!
+        end
+        view 'focus', locals: { focus_data: }
       end
     end
   end

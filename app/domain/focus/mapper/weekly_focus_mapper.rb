@@ -12,7 +12,7 @@ module LightofDay
       end
 
       def for_week
-        (0..7).to_a.map do |index|
+        (0..6).to_a.map do |index|
           @focuslist.select do |focus|
             focus.date == Date.today - index
           end

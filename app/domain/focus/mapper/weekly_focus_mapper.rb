@@ -26,8 +26,8 @@ module LightofDay
       end
 
       def day_summary
-        for_week.map do |day|
-          Entity::DailyFocus.new(day)
+        for_week.map.with_index do |day, index|
+          Entity::DailyFocus.new(day, index)
         end
       end
     end

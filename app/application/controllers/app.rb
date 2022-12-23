@@ -218,7 +218,8 @@ module LightofDay
       end
 
       routing.on 'test' do
-        focus_data = Service::ListFocus.new.call
+        # focus_data = Service::ListFocus.new.call
+        focus_data = Service::AnalyzeFocus.new.call
         if focus_data.failure?
           flash[:error] = focus_data.failure
           focus_data = []

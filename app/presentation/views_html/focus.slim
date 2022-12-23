@@ -20,18 +20,53 @@
     .focus-date
       | Date
     .focus-time
-      | Work Time
+      | Total Work Time
     .rest-time
-      | Rest Time
+      | Total Rest Time
   - focus_data.each do |focus|
     .focus-card
       .focus-date
         i.fa-regular.fa-calendar
-        |  #{focus.date}
+        |  #{focus.daily_date}
       .focus-time
-        | #{focus.work_time} mins
+        | #{focus.daily_work} mins
       .rest-time
-        | #{focus.rest_time} mins
+        | #{focus.daily_rest} mins
+
+/ .header
+/   .service-logo
+/     a[href="/"]
+/     .sv-light
+/       | Light
+/     .sv-of
+/       | of
+/     .sv-day
+/       | Day
+/   .menu
+/     .menuitem
+/       a[href="/"]
+/         |  topic 
+/     .menuitem.active
+/       a[href="/"]
+/         |  favorite 
+/   .clear
+/ .focus-set
+/   .focus-card
+/     .focus-date
+/       | Date
+/     .focus-time
+/       | Work Time
+/     .rest-time
+/       | Rest Time
+/   - focus_data.each do |focus|
+/     .focus-card
+/       .focus-date
+/         i.fa-regular.fa-calendar
+/         |  #{focus.date}
+/       .focus-time
+/         | #{focus.work_time} mins
+/       .rest-time
+/         | #{focus.rest_time} mins
 / - focus_data.each do |focus|
 /   ul 
 /     li #{focus.id}

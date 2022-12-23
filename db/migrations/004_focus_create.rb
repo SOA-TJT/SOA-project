@@ -10,7 +10,7 @@ Sequel.migration do
       String      :uuid
       Integer     :rest_time
       Integer     :work_time
-      String      :date
+      Date :date
       DateTime :created_time
       DateTime :updated_time
     end

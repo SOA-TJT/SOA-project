@@ -1,4 +1,4 @@
-folders = %w[entities lib repositories]
+folders = %w[entities lib repositories mapper]
 folders.each do |folder|
   Dir.glob("#{__dir__}/#{folder}/**/*.rb").each do |file|
     puts file

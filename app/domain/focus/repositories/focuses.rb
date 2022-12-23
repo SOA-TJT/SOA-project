@@ -16,6 +16,11 @@ module LightofDay
         Database::FocusOrm.create(entity.to_attr_hash)
       end
 
+      def self.find_last7
+        Database::FocusOrm
+          .where(Sequel[:date] > Date.today - 7).all.map { |db_focus| rebuild_entity(db_focus) }
+      end
+
       def self.find
         Database::FocusOrm.all.map { |db_focus| rebuild_entity(db_focus) }
       end

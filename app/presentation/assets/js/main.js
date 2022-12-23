@@ -134,6 +134,17 @@ safe_time=()=>{
   topic_id=document.getElementById('topic_id').getAttribute("value")
   console.log(topic_id);
   // topic_id.split(',')
-  window.location = '/light-of-day/safe/'+ topic_id.split(',')[0]+'/' + workTime.innerText+'/' + restTime.innerText;
+  
+  // window.location = '/light-of-day/safe/'+ topic_id.split(',')[0]+'/' + workTime.innerText+'/' + restTime.innerText;
+  // window.location = window.location.href+'/' +restTime.innerText +'/' + workTime.innerText;
+  if (window.location.href.includes('topic')){
+    // window.location = '/light-of-day/topic/'+ topic_id.split(',')[0]+'/' +restTime.innerText +'/' + workTime.innerText;
+    window.location = window.location.href.split('/').slice(0,6).join('/')+'/' +restTime.innerText +'/' + workTime.innerText;
+  }
+  else{
+    // console.log(window.location.href.split('/').slice(1,6).join('/'));
+    window.location = window.location.href.split('/').slice(0,6).join('/')+'/' +restTime.innerText +'/' + workTime.innerText;
+  }
   // window.location = '/light-of-day/topic/'+topic_id;
 }
+// console.log(window.location.href)

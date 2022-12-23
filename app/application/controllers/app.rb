@@ -90,7 +90,7 @@ module LightofDay
           end
         end
 
-        routing.on 'safe', String, String, String do |topic_slug, rest_time, work_time|
+        routing.on 'topic', String, String, String do |topic_slug, rest_time, work_time|
           # GET /light-of-day/topic/{topic}
           routing.get do
             # puts 'hhhlo'
@@ -149,6 +149,24 @@ module LightofDay
               routing.redirect "favorite/#{view_id}"
             end
           end
+          routing.on String, String, String do |view_id, rest_time, work_time|
+            # GET /light-of-day/favorite/{view_id}
+            routing.get do
+              Service::StoreFocus.new.call(work_time, rest_time)
+              lightofday_get = Service::GetLightofDay.new.call(view_id)
+
+              if lightofday_get.failure?
+                flash[:error] = lightofday_get.failure
+              else
+                lightofday_data = lightofday_get.value!
+                flash.now[:error] = 'Data not found' if lightofday_get.nil?
+              end
+
+              view_lightofday = Views::LightofDay.new(lightofday_data)
+              view 'view', locals: { view: view_lightofday, is_saved: true }
+            end
+          end
+
           routing.on String do |view_id|
             # Delete /light-of-day/favorite/{view_id}
 

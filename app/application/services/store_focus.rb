@@ -30,7 +30,8 @@ module LightofDay
           uuid: SecureRandom.uuid,
           rest_time:,
           work_time:,
-          date: Time.now.strftime('%Y-%m-%d %H:%M:%S').split(' ').first
+          date: Date.today
+          # Time.now.strftime('%Y-%m-%d %H:%M:%S').split(' ').first
         )
       end
     end

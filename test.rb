@@ -20,61 +20,56 @@
 #        .new(UNSPLAH_TOKEN, TOPIC_ID)
 #        .find_a_photo
 # puts view
-my_repo =
-  LightofDay::Database::FocusOrm.create(id: '123', ssid: 'eeeee', uuid: 'cccccc', rest_time: 20,
-                                        work_time: 40, date: Time.now)
 
-# puts view.class.name
-# hash_object = view.instance_variables_hash
-# hash_test = view.context
-# puts hash_test
-# puts hash_test[0]
-# puts hash_test[0].class
-# test_data = hash_test[0].to_json
-# fin = JSON.parse(hash_test)
-# # puts JSON.parse(hash_test)
-# # puts fin['@attributes']
-# puts fin['@attributes']['inspiration']
-# puts fin['@attributes']['inspiration'].class.name
+# my_repo =
+#   LightofDay::Database::FocusOrm.create(id: '123', ssid: 'eeeee', uuid: 'cccccc', rest_time: 20,
+#                                         work_time: 40, date: Time.now)
+# LightofDay::Database::FocusOrm.create(ssid: 'eeeee1', uuid: 'ccccc1c', rest_time: 20, work_time: 40,
+#                                       date: Time.now.strftime('%Y-%m-%d %H:%M:%S').split(' ').first)
 
-# ins_record = LightofDay::FavQs::Entity::Inspiration.new(
-#   id: fin['@attributes']['inspiration']['@attributes']['id'],
-#   origin_id: fin['@attributes']['inspiration']['@attributes']['origin_id'],
-#   topics: fin['@attributes']['inspiration']['@attributes']['topics'],
-#   author: fin['@attributes']['inspiration']['@attributes']['author'],
-#   quote: fin['@attributes']['inspiration']['@attributes']['quote']
-# )
+puts Random.new.rand(20..100)
 
-# view_record = LightofDay::Unsplash::Entity::View.new(
-#   id: fin['@attributes']['id'],
-#   origin_id: fin['@attributes']['origin_id'],
-#   topics: fin['@attributes']['topics'],
-#   width: fin['@attributes']['width'],
-#   height: fin['@attributes']['height'],
-#   urls: fin['@attributes']['urls'],
-#   urls_small: fin['@attributes']['urls_small'],
-#   creator_name: fin['@attributes']['creator_name'],
-#   creator_bio: fin['@attributes']['creator_bio'],
-#   creator_image: fin['@attributes']['creator_image'],
-#   inspiration: ins_record
-# )
-# LightofDay::Repository::For.entity(view_record).create(view_record)
-# puts hash_object
-# hash_as_string = hash_object.to_json
-# puts hash_as_string.class
-# raw_data = JSON.parse(hash_object)
+module Mixins
+  def total_rest_time
+    focustimes.map(&:time).sum
+  end
 
-# puts raw_data['@attributes']
-# puts raw_data['@attributes']['id']
-# puts raw_data['@attributes']['origin_id']
-# puts raw_data['@attributes']['topics']
-# puts raw_data['@attributes']['width']
-# puts raw_data['@attributes']['height']
-# puts raw_data['@attributes']['urls_small']
-# puts raw_data['@attributes']['creator_name']
-# puts raw_data['@attributes']['creator_bio']
-# puts raw_data['@attributes']['creator_image']
-# puts raw_data['@attributes']['creator_name']
-# puts JSON.parse(hash_object)
-# inspiration = LightofDay::FavQs::InspirationMapper.new.find_random
-# rebuilt = LightofDay::Repository::For.entity(view).create(view, inspiration)
+  def rest_time
+    value
+  end
+end
+
+class Test
+  include Mixins
+  attr_reader :value, :time
+
+  def initialize
+    @value = Random.new.rand(20..100)
+    @time = Random.new.rand(20..100)
+  end
+end
+
+arr = (1..10).to_a.map do
+  Test.new
+end
+
+class A
+  include Mixins
+  def initialize(arr)
+    @cac = arr
+  end
+
+  # def total_time
+  #   @cac.map(&:time).sum
+  # end
+  def total_time
+    @cac.map(&:rest_time).sum
+  end
+
+  # def total_time
+  #   @cac.map { |single| single.value }.sum
+  # end
+end
+
+puts arr
+puts A.new(arr).total_time

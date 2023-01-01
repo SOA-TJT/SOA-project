@@ -225,8 +225,10 @@ module LightofDay
           focus_data = []
         else
           focus_data = focus_data.value!
+          puts focus_data
+          view_focus = Views::FocusList.new(focus_data)
         end
-        view 'focus', locals: { focus_data: }
+        view 'focus', locals: { view_focus: }
       end
     end
   end

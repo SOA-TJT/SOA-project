@@ -13,6 +13,12 @@ module LightofDay
         # @total_rest_time = 0
       end
 
+      def day_summary
+        @weekly_list.map.with_index do |day, index|
+          Entity::DailyFocus.new(day, index)
+        end
+      end
+
       def weekly_work
         @weekly_list.map(&:work_time).sum
       end
